@@ -556,14 +556,14 @@ int create_channel_device_by_type(
 	/* Add a pointer from the channel device to the test context info */
 	channel_dev->test = ipa_test;
 
-	channel_dev->class = class_create(THIS_MODULE, channel_dev->name);
+	channel_dev->class = class_create(THIS_MODULE, name);
 	if (IS_ERR(channel_dev->class)) {
 		IPATEST_ERR(":class_create() err.\n");
 		ret = -ENOMEM;
 		goto create_class_failure;
 	}
 
-	ret = alloc_chrdev_region(&channel_dev->dev_num, 0, 1, channel_dev->name);
+	ret = alloc_chrdev_region(&channel_dev->dev_num, 0, 1, name);
 	if (ret) {
 		IPATEST_ERR("alloc_chrdev_region err.\n");
 		ret = -ENOMEM;
@@ -571,7 +571,7 @@ int create_channel_device_by_type(
 	}
 
 	channel_dev->dev = device_create(channel_dev->class, NULL,
-		channel_dev->dev_num, channel_dev, channel_dev->name);
+		channel_dev->dev_num, channel_dev, name);
 	if (IS_ERR(channel_dev->dev)) {
 		IPATEST_ERR("device_create err.\n");
 		ret = -ENODEV;
@@ -603,7 +603,7 @@ int create_channel_device_by_type(
 
 	if (!ret)
 		IPATEST_DBG("Channel device:%d, name:%s created, address:0x%px.\n",
-			index, channel_dev->name, channel_dev);
+			index, name, channel_dev);
 
 	return 0;
 
@@ -620,7 +620,7 @@ create_class_failure:
 create_channel_device_failure:
 	kfree(channel_dev);
 	IPATEST_ERR("Channel device %d, name %s creation FAILED.\n",
-		index, channel_dev->name);
+		index, name);
 
 	return ret;
 }

@@ -24,6 +24,10 @@ cc_library_shared {
     vendor: true,
     clang: true,
 
-    cflags: ["-DDEBUG"] + ["-DFEATURE_IPA_ANDROID"] + ["-Wno-int-conversion"],
+    clang_cflags: [
+        "-DDEBUG",
+        "-DFEATURE_IPA_ANDROID",
+        "-Wno-int-conversion",
+    ],
 
 }

@@ -3,5 +3,5 @@
 all:
 	cd drivers/platform/msm/ && $(MAKE)
 
-obj-m += drivers/platform/msm/
+obj-y += drivers/platform/msm/
 

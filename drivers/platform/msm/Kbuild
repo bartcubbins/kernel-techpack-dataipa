@@ -2,14 +2,13 @@
 DATAIPADRVTOP = $(srctree)/techpack/dataipa/drivers/platform/msm
 
 #MSMs - GKI
-ifeq ($(filter $(CONFIG_ARCH_LAHAINA) $(CONFIG_ARCH_HOLI), y),y)
+ifeq ($(CONFIG_ARCH_LAHAINA), y)
 LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa.h
 include $(srctree)/techpack/dataipa/config/dataipa_GKI.conf
 endif
 
-
 #MSM - Vendor SI
-ifeq ($(CONFIG_ARCH_PARROT), y)
+ifeq ($(filter $(CONFIG_ARCH_BLAIR) $(CONFIG_ARCH_HOLI) $(CONFIG_ARCH_PARROT), y),y)
 LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa_vendor.h
 include $(srctree)/techpack/dataipa/config/dataipa_GKI.conf
 ifeq ($(CONFIG_LOCALVERSION), "-gki-consolidate")
@@ -18,9 +17,6 @@ LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa_debug.h
 endif
 endif
 
-
-
-#MSM - Vendor SI
 ifeq ($(CONFIG_ARCH_WAIPIO), y)
 LINUXINCLUDE    += -include $(srctree)/techpack/dataipa/config/dataipa_vendor.h
 include $(srctree)/techpack/dataipa/config/dataipa_GKI.conf
